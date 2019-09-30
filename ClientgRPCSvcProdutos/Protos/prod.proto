@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCServiceProdutos";
+
+package Prod;
+
+service ProdutoSvc {
+  rpc Listar (ListarProdutosRequest) returns (stream ListarProdutosReply);
+  rpc Incluir (DadosProduto) returns (ProdutoReply);
+  rpc Alterar (DadosProduto) returns (ProdutoReply);
+}
+
+message DadosProduto {
+  string codigoBarras = 1;
+  string nome = 2;
+  double preco = 3;
+}
+
+message ListarProdutosRequest {
+}
+
+message ListarProdutosReply {
+  DadosProduto produto = 1;
+}
+
+message ProdutoReply {
+  bool sucesso = 1;
+  string mensagem = 2;
+  string inconsistencias = 3;
+}
